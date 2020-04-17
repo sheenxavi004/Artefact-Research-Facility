@@ -328,12 +328,20 @@ public class SignUp extends javax.swing.JFrame {
             String pass = password_decoy.getText();
             String Password = password.getText();
             int Superiorid = Integer.parseInt(Superior_id);
+            ResultSet rt = st.executeQuery("SELECT `user_id` FROM `user_info` WHERE `user_id` = '" + Superiorid  +" ' ");
             int advisor_approved = 0;
             if(Superiorid == 0 || Superiorid == -1)
                 advisor_approved = 1;
-            ResultSet rs = st.executeQuery("SELECT `username` FROM `user_info` WHERE `username` = '" + Username + "'");
-            if(rs.next())
-                JOptionPane.showMessageDialog(null,"Username already taken","Warning",WARNING_MESSAGE);
+            Statement stt = conn.createStatement();
+            ResultSet rs = stt.executeQuery("SELECT `username` FROM `user_info` WHERE `username` = '" + Username + "'");
+            if(Name.equals(""))
+                JOptionPane.showMessageDialog(null,"Name cannot be blank!","Warning",WARNING_MESSAGE);
+            else if(Superiorid != 0 && Superiorid != -1 && !rt.next())
+                JOptionPane.showMessageDialog(null,"No Superior with ID " + Superiorid,"Warning",WARNING_MESSAGE);
+            else if(rs.next())
+                JOptionPane.showMessageDialog(null,"Username already taken !","Warning",WARNING_MESSAGE);
+            else if(Username.equals(""))
+                JOptionPane.showMessageDialog(null,"Username cannot be blank!","Warning",WARNING_MESSAGE);
             else if(!pass.equals(Password))
             {
                 JOptionPane.showMessageDialog(null,"Passwords don't match !","Warning", WARNING_MESSAGE);

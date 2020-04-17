@@ -195,7 +195,7 @@ public class Researcher_View extends javax.swing.JFrame {
                 new ViewResearch(Userid);
             }
             else
-                JOptionPane.showMessageDialog(null,"You are not authorized to view documents. Please contact your superior for access");
+                JOptionPane.showMessageDialog(null,"You are not authorized to view documents. Please contact your superior for access !");
         } 
         catch (Exception ex) {
             JOptionPane.showMessageDialog(null,ex);
