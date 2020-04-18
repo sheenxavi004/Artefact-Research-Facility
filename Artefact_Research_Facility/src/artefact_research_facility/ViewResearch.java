@@ -249,14 +249,14 @@ public class ViewResearch extends javax.swing.JFrame {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Research_Artefact_Facility", "root","");
             Statement st = conn.createStatement();
-            String query = "SELECT `author_id`,`username`,`research_name`,`research_id` FROM `user_info` JOIN `research_info` WHERE `doi` = '"+y+"' and  `user_info`.`user_id` = `research_info`.`author_id`";
+            String query = "SELECT `author_id`,`name`,`research_name`,`research_id` FROM `user_info` JOIN `research_info` WHERE `doi` = '"+y+"' and  `user_info`.`user_id` = `research_info`.`author_id`";
             ResultSet rs = st.executeQuery(query);
             
             while(rs.next())
             {
                 int research_id = rs.getInt("research_id");
                 String rname = rs.getString("research_name");
-                String author = rs.getString("username");
+                String author = rs.getString("name");
                 Statement stf = conn.createStatement();
                 String fquery = "SELECT `file_id`,`file_location`,`file_name` FROM `file_info` WHERE `research_id` = '"+ research_id +"'";
                 ResultSet rf = stf.executeQuery(fquery);
@@ -285,7 +285,7 @@ public class ViewResearch extends javax.swing.JFrame {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Research_Artefact_Facility", "root","");
             Statement st = conn.createStatement();
-            String query = "SELECT `username`,`research_name`,`research_id`,`doi` FROM `user_info` JOIN `research_info` WHERE `research_name` = '"+topin+"' and  `user_info`.`user_id` = `research_info`.`author_id`";
+            String query = "SELECT `name`,`research_name`,`research_id`,`doi` FROM `user_info` JOIN `research_info` WHERE `research_name` = '"+topin+"' and  `user_info`.`user_id` = `research_info`.`author_id`";
             ResultSet rs = st.executeQuery(query);
             
             while(rs.next())
@@ -293,7 +293,7 @@ public class ViewResearch extends javax.swing.JFrame {
                 int research_id = rs.getInt("research_id");
                 int yr = rs.getInt("doi");
                 String rname = rs.getString("research_name");
-                String author = rs.getString("username");
+                String author = rs.getString("name");
                 Statement stf = conn.createStatement();
                 String fquery = "SELECT `file_id`,`file_name`,`file_location` FROM `file_info` WHERE `research_id` = '"+ research_id +"'";
                 ResultSet rf = stf.executeQuery(fquery);

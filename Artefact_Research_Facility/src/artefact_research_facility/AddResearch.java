@@ -171,7 +171,6 @@ public class AddResearch extends javax.swing.JFrame {
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int researchid;
         String Path = Paths.get("").toAbsolutePath().toString() + "/uploads/";
-        JOptionPane.showMessageDialog(null,Path);
         try{
 
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Research_Artefact_Facility", "root", "");
