@@ -72,7 +72,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
 
-        register.setText("Admin Login");
+        register.setText("Login as Admin");
         register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerActionPerformed(evt);
@@ -226,7 +226,7 @@ public class LogIn extends javax.swing.JFrame {
                 if (Superior_id == 0) {
                     int user_id = rs.getInt("user_id");
                     Superior_View sv = new Superior_View(user_id);
-                } else {
+                }else {
                     int user_id = rs.getInt("user_id");
                     Researcher_View rv = new Researcher_View(user_id);
                 }

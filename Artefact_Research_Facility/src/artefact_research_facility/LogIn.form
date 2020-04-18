@@ -138,7 +138,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="register">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Admin Login"/>
+            <Property name="text" type="java.lang.String" value="Login as Admin"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerActionPerformed"/>
