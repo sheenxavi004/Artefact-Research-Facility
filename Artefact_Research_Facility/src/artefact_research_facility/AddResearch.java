@@ -12,6 +12,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -168,7 +170,7 @@ public class AddResearch extends javax.swing.JFrame {
         String filename = fname.getText();
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int researchid;
-        String Path = "/home/sheenxavi004/Documents/Artefact_Research_Facility/";
+        String Path = Paths.get("").toAbsolutePath().toString() + "/uploads/";
         try{
 
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Research_Artefact_Facility", "root", "");
