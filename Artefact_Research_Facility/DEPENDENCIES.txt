@@ -1,0 +1,92 @@
+				DEPENDENCIES.TXT
+
+1) Prerequisites
+-----------------
+
+A Java Development Kit(JDK) is required for compiling and interpreting the Java files.
+JDK can be installed using the command :
+
+$ sudo apt-get install default-jdk
+
+Since the application requires the use of database we use MySQL. MySQL can be in-
+stalled by using the command :
+
+$ sudo apt-get install mysql-server
+
+MySQL server is difficult to handle in the Terminal, so we require a GUI application
+such as MySQL Workbench for handling the databases. It helps us to create databases
+and their tables with ease and also helps us to monitor changes in the same. It can be
+installed using the command :
+
+$ sudo apt-get install mysql-workbench
+
+
+2) Database Requirements
+-------------------------
+
+• Initially we have to set up the database with a user named "root" with no password
+as the database is connected via a user named root with no password
+• We require three levels of information : User Level, Research Level and File Level.
+• So we create a Database, Artefact_Research_Facility with three tables named
+user_info, research_info and file_info.
+
+	CREATE DATABASE ‘Artefact_Research_Facility‘ ;
+	USE ‘Artefact_Research_Facility‘ ;
+
+• The table user_info is used to handle information regarding the researchers and
+their superiors. Here every Researcher including the Superiors are allotted a unique
+User ID which is the primary key. Here Superiors are allocated the Superior ID
+= 0 and for the other researchers the Superior ID is set to the User ID of his/her
+Superior. There are several other details specified in the same table such as Email
+ID, Date of Birth. The SQL query required to generate user_info table is given
+below :
+
+	 CREATE TABLE ‘user_info‘ (
+	 ‘ user_id ‘ int(11) NOT NULL AUTO_INCREMENT,
+	 ‘ username ‘ varchar(45) NOT NULL,
+	 ‘ password ‘ varchar(45) DEFAULT NULL,
+	 ‘ name ‘ varchar(45) NOT NULL,
+	 ‘ email_id ‘ varchar(250) DEFAULT NULL,
+	 ‘ dob ‘ date NOT NULL,
+	 ‘ superior_id ‘ int(11) DEFAULT NULL,
+	 ‘ advisor_approved ‘ tinyint(4) NOT NULL DEFAULT ’ 0 ’ ,
+	 PRIMARY KEY ( ‘ user_id ‘ ) ,
+	 KEY ‘ user_id_idx ‘ (‘superior_id‘)
+	 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+• The table research_info is used to handle research info. Here each research is identi-
+fied by a unique Research ID. The table also contains an Author ID which is actually
+a foreign key which references the User ID of the user_info table. This relation en-
+sures validation of authors. The SQL query required to generate research_info is
+given below :
+
+	CREATE TABLE ‘research_info‘ (
+	‘ research_id ‘ int(11) NOT NULL AUTO_INCREMENT,
+	‘ research_name ‘ varchar(100) NOT NULL,
+	‘ author_id‘ int (11) NOT NULL,
+	‘ doi ‘ year(4) NOT NULL,
+	KEY ‘ user_id_idx ‘ ( ‘ author_id ‘ ) ,
+	KEY ‘ user_id1_idx ‘ ( ‘ author_id ‘ ) ,
+	KEY ‘ author_id_idx ‘ ( ‘ author_id ‘ ) ,
+	CONSTRAINT ‘ author_id ‘ FOREIGN KEY ( ‘ author_id ‘ ) REFERENCES ‘
+	user_info‘ ( ‘ user_id ‘ )
+	) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+• The table file_info is used to maintain information regarding files coming under
+researches. Each file is identified by the File ID. The table contains a Research
+ID which is a foreign key which references the Research ID of the research_info
+table. This relation ensures that every file comes under a particular research. The
+file_location maintains the location of the file in the local system. The SQL query
+required to generate file_info is given below :
+
+	CREATE TABLE ‘file_info‘ (
+	‘ file_id‘ int(11) NOT NULL AUTO_INCREMENT,
+	‘ file_name ‘ varchar (100) NOT NULL,
+	‘ research_id ‘int(11) NOT NULL,
+	‘ file_location ‘ varchar(1000 ) NOT NULL,
+	PRIMARY KEY ( ‘file_id ‘ ) ,
+	KEY ‘ research_id_idx ‘ ( ‘ research_id ‘ ) ,
+	CONSTRAINT ‘ research_id ‘ FOREIGN KEY ( ‘ research_id ‘ ) REFERENCES ‘
+	research_info ‘ ( ‘ research_id ‘ ) ON DELETE CASCADE ON UPDATE CASCADE
+	) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
